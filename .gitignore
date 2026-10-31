@@ -1,26 +1,27 @@
-# Python virtual environments
+# Virtual Environment
 .venv/
 venv/
 ENV/
 env/
 
-# Python byte-code and caches
+# Python Cache & Bytecode
 __pycache__/
 *.py[cod]
 *$py.class
 
-# PyCharm local IDE configurations
+# PyCharm & IDE Settings
 .idea/
+.vscode/
 
-# Environment secrets (Strict: never commit .env)
+# Environment Variables & Secrets (Strict: Never commit secrets)
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
 
-# SQLite local database
+# Database files
 *.sqlite3
 db.sqlite3
 
-# Operating System temporary files
+# OS Specific Files
 .DS_Store
 Thumbs.db
