@@ -1,5 +1,25 @@
 # AGENT INSTRUCTIONS & WORKSPACE RULES
 
+---
+
+### STRICT AGENT POLICY: GIT IS STRICTLY READ-ONLY
+
+- Do NOT execute any Git write, modification, branching, or pushing commands.
+- Never run:
+  * `git commit`
+  * `git push`
+  * `git checkout -b` or `git branch`
+  * `git merge` or `git rebase`
+  * `git tag` or `git reset`
+- Allowed Commands (Read-Only inspection ONLY):
+  * `git status`
+  * `git log`
+  * `git diff`
+- All staging (`git add`), committing, branch management, and remote pushes MUST be handled manually by the developer via local terminal.
+- After making code/file changes, summarize what was modified and stop. Do not attempt to commit.
+
+---
+
 ## 1. Documentation & Knowledge Source
 - **Primary Source of Truth**: Obsidian Vault located in local `Documents/Obsidian/` (refer to the PSEB DEPLOY documentation files).
 - Always verify rules, grading rubrics, and project guidelines against the Obsidian notes before generating architecture or code.
