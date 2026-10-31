@@ -1,26 +1,26 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# PyCharm local workspace
-.idea/
-
-# Virtual Environments
+# Python virtual environments
 .venv/
 venv/
 ENV/
 env/
 
-# Environment Variables & Secrets (STRICT: Never commit .env)
+# Python byte-code and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm local IDE configurations
+.idea/
+
+# Environment secrets (Strict: never commit .env)
 .env
 .env.*
 !.env.example
 
-# SQLite Database
+# SQLite local database
 *.sqlite3
 db.sqlite3
 
-# Operating System
+# Operating System temporary files
 .DS_Store
 Thumbs.db
