@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm local workspace
+.idea/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment Variables & Secrets (STRICT: Never commit .env)
+.env
+.env.*
+!.env.example
+
+# SQLite Database
+*.sqlite3
+db.sqlite3
+
+# Operating System
+.DS_Store
+Thumbs.db
