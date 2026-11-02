@@ -20,9 +20,31 @@
 # - The program must display the original bill, discount amount,
 # and final payable amount.
 
-print("===== SMART CANTEEN =====")
-bill_amount = float(input("Enter your total bill amount (Rs.): "))
+print("================================")
+print("         SMART CANTEEN          ")
+print("================================")
 
+# Student Challenge 1: Input validation for positive bill amount
+while True:
+    try:
+        bill_amount = float(input("Enter your total bill amount (Rs.): "))
+        if bill_amount <= 0:
+            print("Invalid bill amount! Please enter an amount greater than 0.")
+            continue
+        break
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+
+# Student Challenge 2: Ask for membership card with validation
+while True:
+    membership_input = input("Do you have a membership card? (yes/no): ").strip().lower()
+    if membership_input in ["yes", "no"]:
+        break
+    print("Please enter 'yes' or 'no'.")
+
+has_membership = membership_input == "yes"
+
+# Standard tiered discount logic
 if bill_amount >= 3000:
     discount_rate = 20
 elif bill_amount >= 2000:
@@ -31,27 +53,33 @@ elif bill_amount >= 1000:
     discount_rate = 5
 else:
     discount_rate = 0
+
 discount_amount = bill_amount * discount_rate / 100
-final_amount = bill_amount - discount_amount
+amount_after_standard = bill_amount - discount_amount
 
-print("\n===== BILL SUMMARY =====")
-print(f"Original Bill: Rs. {bill_amount:.2f}")
-print(f"Discount Rate: {discount_rate}%")
-print(f"Discount Amount: Rs. {discount_amount:.2f}")
-print(f"Final Payable: Rs. {final_amount:.2f}")
+# Student Challenge 2: 5% additional discount on remaining amount for members
+if has_membership:
+    membership_discount = amount_after_standard * 5 / 100
+else:
+    membership_discount = 0.0
 
+total_savings = discount_amount + membership_discount
+final_amount = bill_amount - total_savings
 
+print("\n================================")
+print("          BILL SUMMARY          ")
+print("================================")
+print(f"Original Bill:                 Rs. {bill_amount:.2f}")
+print(f"Standard Discount ({discount_rate}%):       Rs. {discount_amount:.2f}")
 
-# Practice Question:
-# Student Challenge
-# Ask students to extend the program with these features:
-# 1. If the bill is less than or equal to zero, display an invalid 
-# bill message.
-# 2. If the student has a membership card, provide an additional 5% 
-# discount.
-# 3. Display a message saying "Congratulations! You saved Rs. X" 
-# when a discount is applied.
-# Teaching question: Why do we use elif instead of writing several 
-# independent if statements?
+if has_membership:
+    print(f"Membership Discount:           Rs. {membership_discount:.2f}")
 
+print(f"Total Savings:                 Rs. {total_savings:.2f}")
+print(f"Final Payable Amount:          Rs. {final_amount:.2f}")
 
+# Student Challenge 3: Congratulatory message when discount is applied
+if total_savings > 0:
+    print(f"Congratulations! You saved Rs. {total_savings:.2f}.")
+else:
+    print("No discount applied on this order.")

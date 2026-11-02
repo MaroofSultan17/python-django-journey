@@ -87,6 +87,15 @@ This is a **console-based** program, not a graphical web interface. Its basic us
 
 These choices make the output easier for a beginner to follow. A future extension could add a graphical interface or web page, but that is outside the scope of this Python conditionals exercise.
 
+## Implemented Student Challenges
+
+The following practice challenges from class have been implemented in `smart_canteen_discount.py`:
+
+1. **Input Validation**: Added a `try/except` loop to reject non-numeric inputs and bill amounts less than or equal to 0.
+2. **Membership Check**: Added a prompt that only accepts `yes` or `no`.
+3. **Membership Discount**: Applied an additional 5% discount on the remaining amount after the standard discount.
+4. **Congratulations Message**: Displays total savings when a discount is applied.
+
 ## Practice Challenges
 
 1. Add a rule that rejects membership answers other than `yes` or `no`.
