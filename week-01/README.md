@@ -12,3 +12,7 @@ This directory contains foundational Python programming exercises and real-world
    - **Topics**: Loop structures (`for`, `range()`), loop control (`continue`), running accumulators, progressive tiered tariff calculations, statistics (max, average, successful counts), robust error handling.
    - **File**: `smart_electricity_bill.py`
 
+3. **[Student Scholarship System Assessment (`python-conditions-loops-assessment`)](./python-conditions-loops-assessment)**
+   - **Topics**: Input validation loops (`try/except`), boundary checks (0–100%), multi-criteria conditional branching, scholarship tier categorization (Full vs. Partial), comprehensive ineligibility reporting.
+   - **File**: `student_scholarship_system.py`
+
