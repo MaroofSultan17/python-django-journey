@@ -16,34 +16,64 @@ sales_records = []
 def add_product():
     # Adds a new product dictionary to products list
     print("\n--- Add New Product ---")
-    p_id = input("Enter Product ID: ").strip()
-    if not p_id.isdigit():
-        print("Invalid ID! Please enter numbers only.")
-        return
 
-    p_id = int(p_id)
-    # Check if ID already exists
-    for p in products:
-        if p["id"] == p_id:
+    # 1. Validate Product ID and prevent duplicates
+    while True:
+        p_id = input("Enter Product ID: ").strip()
+        if not p_id.isdigit():
+            print("Invalid ID! Please enter numbers only.")
+            continue
+
+        p_id = int(p_id)
+        exists = False
+        for p in products:
+            if p["id"] == p_id:
+                exists = True
+                break
+
+        if exists:
             print("Product ID already exists! Please use a unique ID.")
-            return
+        else:
+            break
 
-    name = input("Enter Product Name: ").strip().title()
-    category = input("Enter Category: ").strip().title()
-    price = input("Enter Price (Rs.): ").strip()
-    stock = input("Enter Stock Quantity: ").strip()
+    # 2. Get name and category
+    while True:
+        name = input("Enter Product Name: ").strip().title()
+        if name != "":
+            break
+        print("Product name cannot be empty.")
 
-    if price.isdigit() and stock.isdigit():
-        products.append({
-            "id": p_id,
-            "name": name,
-            "category": category,
-            "price": int(price),
-            "stock": int(stock)
-        })
-        print(f"Product '{name}' added successfully!")
-    else:
-        print("Invalid price or stock! Must be whole numbers.")
+    while True:
+        category = input("Enter Category: ").strip().title()
+        if category != "":
+            break
+        print("Category cannot be empty.")
+
+    # 3. Get price
+    while True:
+        price = input("Enter Price (Rs.): ").strip()
+        if price.isdigit() and int(price) > 0:
+            price = int(price)
+            break
+        print("Invalid price! Enter a positive whole number.")
+
+    # 4. Get stock
+    while True:
+        stock = input("Enter Stock Quantity: ").strip()
+        if stock.isdigit() and int(stock) >= 0:
+            stock = int(stock)
+            break
+        print("Invalid stock! Enter a whole number (0 or more).")
+
+    # Add to list
+    products.append({
+        "id": p_id,
+        "name": name,
+        "category": category,
+        "price": price,
+        "stock": stock
+    })
+    print(f"Product '{name}' added successfully!")
 
 
 def view_products():
@@ -62,8 +92,11 @@ def view_products():
 def search_product():
     # Searches product by ID or Name
     query = input("\nEnter Product ID or Name to search: ").strip()
-    found = False
+    if query == "":
+        print("Search query cannot be empty.")
+        return
 
+    found = False
     for p in products:
         if (query.isdigit() and p["id"] == int(query)) or (query.lower() in p["name"].lower()):
             print(f"\nFound: ID {p['id']} - {p['name']} ({p['category']}) | Price: Rs.{p['price']} | Stock: {p['stock']} units")
@@ -83,13 +116,13 @@ def update_stock():
     p_id = int(p_id)
     for p in products:
         if p["id"] == p_id:
-            add_qty = input(f"Current stock of {p['name']} is {p['stock']}. Enter quantity to add: ").strip()
-            if add_qty.isdigit() and int(add_qty) > 0:
-                p["stock"] += int(add_qty)
-                print(f"Updated! New stock for {p['name']} is {p['stock']} units.")
-            else:
+            while True:
+                add_qty = input(f"Current stock of {p['name']} is {p['stock']}. Enter quantity to add: ").strip()
+                if add_qty.isdigit() and int(add_qty) > 0:
+                    p["stock"] += int(add_qty)
+                    print(f"Updated! New stock for {p['name']} is {p['stock']} units.")
+                    return
                 print("Invalid quantity! Enter a positive number.")
-            return
 
     print("Product not found!")
 
@@ -104,31 +137,36 @@ def process_sale():
     p_id = int(p_id)
     for p in products:
         if p["id"] == p_id:
-            qty = input(f"Enter quantity to buy (Available: {p['stock']}): ").strip()
-            if not qty.isdigit() or int(qty) <= 0:
-                print("Invalid quantity! Enter a number greater than 0.")
+            if p["stock"] == 0:
+                print(f"Sorry, '{p['name']}' is currently out of stock!")
                 return
 
-            qty = int(qty)
-            if qty > p["stock"]:
-                print(f"Insufficient stock! Only {p['stock']} units available.")
+            while True:
+                qty = input(f"Enter quantity to buy (Available: {p['stock']}): ").strip()
+                if not qty.isdigit() or int(qty) <= 0:
+                    print("Invalid quantity! Enter a number greater than 0.")
+                    continue
+
+                qty = int(qty)
+                if qty > p["stock"]:
+                    print(f"Insufficient stock! Only {p['stock']} units available.")
+                    return
+
+                total_bill = qty * p["price"]
+                p["stock"] -= qty
+
+                # Save sale record
+                sales_records.append({
+                    "id": p["id"],
+                    "name": p["name"],
+                    "quantity": qty,
+                    "total_amount": total_bill
+                })
+
+                print("\n--- Purchase Receipt ---")
+                print(f"Item: {p['name']} | Qty: {qty} | Total Bill: Rs.{total_bill}")
+                print(f"Remaining Stock: {p['stock']} units")
                 return
-
-            total_bill = qty * p["price"]
-            p["stock"] -= qty
-
-            # Save sale record
-            sales_records.append({
-                "id": p["id"],
-                "name": p["name"],
-                "quantity": qty,
-                "total_amount": total_bill
-            })
-
-            print("\n--- Purchase Receipt ---")
-            print(f"Item: {p['name']} | Qty: {qty} | Total Bill: Rs.{total_bill}")
-            print(f"Remaining Stock: {p['stock']} units")
-            return
 
     print("Product not found!")
 
