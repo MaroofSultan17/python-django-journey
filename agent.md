@@ -21,7 +21,7 @@
 ---
 
 ## 1. Documentation & Knowledge Source
-- **Primary Source of Truth**: Obsidian Vault located in local `Documents/Obsidian/` (refer to the PSEB DEPLOY documentation files).
+- **Primary Source of Truth**: Obsidian Vault located in local `Documents/Obsidian Vault/Python Django Journey/` (refer to the PSEB DEPLOY documentation files).
 - Always verify rules, grading rubrics, and project guidelines against the Obsidian notes before generating architecture or code.
 
 ## 2. Technical Environment & Stack
@@ -46,3 +46,24 @@
 ## 5. Offline-First & Mock Fallback
 - For any AI/Chatbot or external API integrations: Build local mock adapters and rule-based fallbacks **FIRST**. The feature must run 100% offline.
 - Real API calls are treated strictly as an optional bonus. The mock adapter and offline fallback are the graded requirements.
+
+---
+
+## 6. Python Coding & Assessment Standards (Strictly Enforced)
+
+- **Zero AI Boilerplate Policy**:
+  - Never write `if __name__ == "__main__": main()` or artificial `def main():` wrappers for foundational or console scripts.
+  - Procedural code must execute naturally top-to-bottom: helper functions defined at the top, followed by sequential logic. Keep code simple so a layman or evaluator understands it in one read.
+- **PEP 8 Lowercase Functions (`snake_case` Only)**:
+  - All function and variable names MUST be lowercase `snake_case` (e.g., `format_name`, `get_valid_marks`, `add_expense`).
+  - **Never use `camelCase` for Python functions**: It triggers PyCharm / Flake8 warnings (`Function name should be lowercase`).
+- **Input Validation Without `try/except`**:
+  - For basic inputs (marks, roll numbers, quantities, amounts, menu choices), do not use `try-except` blocks.
+  - Use `while True` loops with string methods like `.isdigit()` and `if/else` checks matching `student_scholarship_system.py` and `pharmacy_inventory_system.py`.
+- **Pakistani Educational Context (BISE / Board Standards)**:
+  - Academic result card and grade calculation modules must adhere to Pakistani Board (BISE / FBISE) examination rules.
+  - If any subject score is below 40 (or total below 50%), **withhold aggregate percentage and letter grade** (`---`).
+  - Set status to **`RE-APPEAR`** and provide an explicit notice listing the failed subjects for the supplementary exam.
+- **Hours Log & 100% Viva Defensibility (e.g. 6.0 Hours)**:
+  - Every day worked must have an entry in `hours-log.md` with date, hours, technical description, and the matching commit hash.
+  - Any logged effort (such as 6.0 hours) **must be defended in the project `README.md`** with an Engineering Hours Breakdown & Defense table justifying each phase for the viva checkpoint.
