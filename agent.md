@@ -25,7 +25,7 @@
 - Always verify rules, grading rubrics, and project guidelines against the Obsidian notes before generating architecture or code.
 
 ## 2. Technical Environment & Stack
-- **Environment**: Local Python development inside PyCharm using standard virtual environment (`.venv`).
+- **Environment**: Local Python development inside PyCharm using standard virtual environment (`.venv` running Python 3.9.6).
 - **DO NOT** use Docker, Docker Compose, or containerization.
 - **DO NOT** create over-engineered layers (no unsolicited enterprise services or repository patterns). Keep solutions clean, modular, and strictly aligned with the PDF requirements.
 
@@ -53,17 +53,26 @@
 
 - **Zero AI Boilerplate Policy**:
   - Never write `if __name__ == "__main__": main()` or artificial `def main():` wrappers for foundational or console scripts.
-  - Procedural code must execute naturally top-to-bottom: helper functions defined at the top, followed by sequential logic. Keep code simple so a layman or evaluator understands it in one read.
+  - Procedural code must execute naturally top-to-bottom: helper functions defined at the top, followed by sequential logic.
+- **Teaching-First Code Simplicity**:
+  - Code must be concise, clean, and easy to explain to beginner students in class.
+  - Keep functions short (10–15 lines per function) and focused on a single task. Avoid convoluted nested while loops.
 - **PEP 8 Lowercase Functions (`snake_case` Only)**:
-  - All function and variable names MUST be lowercase `snake_case` (e.g., `format_name`, `get_valid_marks`, `add_expense`).
+  - All function and variable names MUST be lowercase `snake_case` (e.g., `format_name`, `get_valid_marks`, `add_expense`, `process_sale`).
   - **Never use `camelCase` for Python functions**: It triggers PyCharm / Flake8 warnings (`Function name should be lowercase`).
 - **Input Validation Without `try/except`**:
   - For basic inputs (marks, roll numbers, quantities, amounts, menu choices), do not use `try-except` blocks.
   - Use `while True` loops with string methods like `.isdigit()` and `if/else` checks matching `student_scholarship_system.py` and `pharmacy_inventory_system.py`.
+- **Python 3.9 Runtime Compatibility (No `match-case`)**:
+  - The project runs on Python 3.9.6. `match-case` (switch) was introduced in Python 3.10 and causes `SyntaxError: invalid syntax` on Python 3.9.
+  - Always use standard `if-elif-else` for menu branching so scripts run universally on all student machines and LMS servers.
+- **Compound Data Structures (Lists of Dictionaries)**:
+  - In Week 2, represent multi-attribute entities using a list of dictionaries (`products = [{"id": 101, ...}]`) and transactional ledgers in `sales_records`.
+  - Mutate dictionary keys directly in-place (`p["stock"] -= qty`).
 - **Pakistani Educational Context (BISE / Board Standards)**:
   - Academic result card and grade calculation modules must adhere to Pakistani Board (BISE / FBISE) examination rules.
   - If any subject score is below 40 (or total below 50%), **withhold aggregate percentage and letter grade** (`---`).
   - Set status to **`RE-APPEAR`** and provide an explicit notice listing the failed subjects for the supplementary exam.
-- **Hours Log & 100% Viva Defensibility (e.g. 6.0 Hours)**:
+- **Hours Log & 100% Viva Defensibility (e.g. 5.0h / 6.0h)**:
   - Every day worked must have an entry in `hours-log.md` with date, hours, technical description, and the matching commit hash.
-  - Any logged effort (such as 6.0 hours) **must be defended in the project `README.md`** with an Engineering Hours Breakdown & Defense table justifying each phase for the viva checkpoint.
+  - Any logged effort **must be defended in the project `README.md`** with an Engineering Hours Breakdown & Defense table justifying each phase for the viva checkpoint.

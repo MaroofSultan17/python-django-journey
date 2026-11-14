@@ -7,3 +7,7 @@ This directory contains practical programming exercises and real-world system im
 1. **[Smart Grocery Store Management System (`smart-grocery-store-system`)](./smart-grocery-store-system)**
    - **Topics**: Lists of dictionaries (`products = [{...}]`), dictionary key access and mutation, transactional sales ledger (`sales_records = [{...}]`), duplicate ID prevention, customer sale processing with stock deduction, real-time store reporting, and clean input validation without `try/except`.
    - **Files**: `smart_grocery_store.py`, `README.md`
+
+2. **[Files, Errors & Collections Assessment (`python-files-errors-assessment`)](./python-files-errors-assessment)**
+   - **Topics**: CSV and TXT file handling, `try-except` exception handling (`FileNotFoundError`, `ValueError`), sets for deduplication and category extraction, and list comprehensions.
+   - **Files**: `expense_tracker.py`, `attendance_cleaner.py`, `attendance.txt`, `README.md`
